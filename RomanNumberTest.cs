@@ -41,43 +41,49 @@ namespace RomanNumbers
         {
             string romanNumberAsString = "";
 
-            if (numberToConvert == 4)
+            if (numberToConvert >= 10)
             {
-                romanNumberAsString = "IV";
-            }
-            else
-            {
-                if (numberToConvert == 9)
+                romanNumberAsString = "X";
+                numberToConvert %= 10;
+
+                if (numberToConvert == 4)
                 {
-                    romanNumberAsString = "IX";
+                    romanNumberAsString += "IV";
                 }
                 else
                 {
-                    if (numberToConvert == 19)
+                    if (numberToConvert == 9)
                     {
-                        romanNumberAsString = "XIX";
-                    }
-                    else if (numberToConvert == 14)
-                    {
-                        romanNumberAsString = "XIV";
-                    }
-                    else if (numberToConvert >= 15 && numberToConvert <= 18)
-                    {
-                        romanNumberAsString = "XV";
-                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
-                    }
-                    else if (numberToConvert >= 10 && numberToConvert <= 13)
-                    {
-                        romanNumberAsString = "X";
-                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
+                        romanNumberAsString += "IX";
                     }
                     else
                     {
                         if (numberToConvert >= 5 && numberToConvert <= 8)
                         {
-                            romanNumberAsString = "V";
+                            romanNumberAsString += "V";
                         }
 
+                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
+                    }
+                }
+            }
+            else {
+                if (numberToConvert == 4)
+                {
+                    romanNumberAsString = "IV";
+                }
+                else
+                {
+                    if (numberToConvert == 9)
+                    {
+                        romanNumberAsString = "IX";
+                    }
+                   else
+                    {
+                        if (numberToConvert >= 5 && numberToConvert <= 8)
+                        {
+                            romanNumberAsString = "V";
+                        }
                         romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
                     }
                 }
