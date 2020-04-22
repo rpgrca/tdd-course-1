@@ -17,16 +17,21 @@ namespace RomanNumbers
         [Fact] public void testG() => convertToRoman(7).Should().Be("VII");
         [Fact] public void testH() => convertToRoman(8).Should().Be("VIII");
         [Fact] public void testI() => convertToRoman(9).Should().Be("IX");
-        [Fact] public void testJ() => convertToRoman(10).Should().Be("X");
-        [Fact] public void testK()
+        [Fact] public void testJ()
         {
             convertToRoman(10).Should().Be("X");
             convertToRoman(11).Should().Be("XI");
             convertToRoman(12).Should().Be("XII");
             convertToRoman(13).Should().Be("XIII");
         }
- 
-        [Fact] public void testL() => convertToRoman(12).Should().Be("XII");
+        [Fact] public void testK() => convertToRoman(14).Should().Be("XIV");
+        [Fact] public void testL() => convertToRoman(15).Should().Be("XV");
+        [Fact] public void testM()
+        {
+            convertToRoman(16).Should().Be("XVI");
+            convertToRoman(17).Should().Be("XVII");
+            convertToRoman(18).Should().Be("XVIII");
+        }
 
         private string convertToRoman(int numberToConvert)
         {
@@ -42,27 +47,46 @@ namespace RomanNumbers
                 {
                     romanNumberAsString = "IX";
                 }
-                else if (numberToConvert >= 10 && numberToConvert <= 13)
-                    {
-                        romanNumberAsString = "X";
-
-                        for (int x = 0; x < numberToConvert % 5; x++)
-                        {
-                            romanNumberAsString += "I";
-                        }
-                }
                 else
                 {
-                    if (numberToConvert >= 5 && numberToConvert <= 8)
+                    if (numberToConvert == 14)
                     {
-                    romanNumberAsString = "V";
+                        romanNumberAsString = "XIV";
                     }
-
-                    for (int x = 0; x < numberToConvert % 5; x++)
+                    else if (numberToConvert == 15)
                     {
-                        romanNumberAsString += "I";
+                        romanNumberAsString = "XV";
+                    }
+                    else if (numberToConvert >= 16 && numberToConvert <= 18)
+                    {
+                        romanNumberAsString = "XV";
+                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
+                    }
+                    else if (numberToConvert >= 10 && numberToConvert <= 13)
+                    {
+                        romanNumberAsString = "X";
+                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
+                    }
+                    else
+                    {
+                        if (numberToConvert >= 5 && numberToConvert <= 8)
+                        {
+                            romanNumberAsString = "V";
+                        }
+
+                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
                     }
                 }
+            }
+
+            return romanNumberAsString;
+        }
+
+        private string addITo(int numberToConvert, string romanNumberAsString)
+        {
+            for (int x = 0; x < numberToConvert % 5; x++)
+            {
+                romanNumberAsString += "I";
             }
 
             return romanNumberAsString;
