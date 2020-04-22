@@ -94,15 +94,7 @@ namespace RomanNumbers
 
         private string convertToRoman(int numberToConvert)
         {
-            var romanNumberAsString = "";
-            var units = numberToConvert % 10;
-            var tens = numberToConvert / 10 % 10;
-            var hundreds = numberToConvert / 100 % 10;
-
-            romanNumberAsString = new DigitConverter("C", "D", "M").ConvertDigit(hundreds, romanNumberAsString);
-            romanNumberAsString = new DigitConverter("X", "L", "C").ConvertDigit(tens, romanNumberAsString);
-            romanNumberAsString = new DigitConverter("I", "V", "X").ConvertDigit(units, romanNumberAsString);
-            return romanNumberAsString;
+            return new RomanNumberTextRepresentation().ConvertToRoman(numberToConvert);
         }
     }
 }
