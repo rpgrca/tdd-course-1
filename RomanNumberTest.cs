@@ -30,29 +30,6 @@ namespace RomanNumbers
 
         private string convertToRoman(int numberToConvert)
         {
-            var romanLettersAndValues = new [] { (1, "I"), (5, "V"), (10, "X") };
-            var romanNumberAsString = "";
-            var restToConvert = numberToConvert;
-
-            while (restToConvert > 0)
-            {
-                foreach (var (value, letter) in romanLettersAndValues.Reverse())
-                {
-                    var times = numberToConvert % value;
-                    if (times <= value)
-                    {
-                        romanNumberAsString += letter;
-                        restToConvert -= value;
-                    }
-                }
-            }
-
-            return romanNumberAsString;
-        }
-
-/*
-        private string convertToRoman(int numberToConvert)
-        {
             string romanNumberAsString = "";
 
             if (numberToConvert == 4)
@@ -89,6 +66,6 @@ namespace RomanNumbers
             }
 
             return romanNumberAsString;
-        }*/
+        }
     }
 }
