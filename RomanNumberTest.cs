@@ -45,26 +45,57 @@ namespace RomanNumbers
             convertToRoman(28).Should().Be("XXVIII");
             convertToRoman(29).Should().Be("XXIX");
         }
+        [Fact] public void testP()
+        {
+            convertToRoman(30).Should().Be("XXX");
+            convertToRoman(31).Should().Be("XXXI");
+            convertToRoman(34).Should().Be("XXXIV");
+            convertToRoman(35).Should().Be("XXXV");
+            convertToRoman(38).Should().Be("XXXVIII");
+            convertToRoman(39).Should().Be("XXXIX");
+        }
+
+        [Fact] public void testQ()
+        {
+            convertToRoman(40).Should().Be("XL");
+            convertToRoman(41).Should().Be("XLI");
+            convertToRoman(44).Should().Be("XLIV");
+            convertToRoman(45).Should().Be("XLV");
+            convertToRoman(48).Should().Be("XLVIII");
+            convertToRoman(49).Should().Be("XLIX");
+        }
 
         private string convertToRoman(int numberToConvert)
         {
             var romanNumberAsString = "";
-            var modulo = numberToConvert % 10;
+            var units = numberToConvert % 10;
 
-            if (numberToConvert >= 20)
+            if (numberToConvert >= 40)
             {
-                romanNumberAsString = "XX";
-                numberToConvert %= 10;
+                romanNumberAsString += "XL";
             }
-            else {
-                if (numberToConvert >= 10)
+            else
+            {
+                if (numberToConvert >= 30)
                 {
-                    romanNumberAsString += "X";
-                    numberToConvert %= 10;
+                    romanNumberAsString += "XXX";
+                }
+                else
+                {
+                    if (numberToConvert >= 20)
+                    {
+                        romanNumberAsString += "XX";
+                    }
+                    else {
+                        if (numberToConvert >= 10)
+                        {
+                            romanNumberAsString += "X";
+                        }
+                    }
                 }
             }
 
-            romanNumberAsString = ConvertDigit(modulo, romanNumberAsString);
+            romanNumberAsString = ConvertDigit(units, romanNumberAsString);
             return romanNumberAsString;
         }
 
