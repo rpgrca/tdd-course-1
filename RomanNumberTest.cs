@@ -12,10 +12,13 @@ namespace RomanNumbers
         [Fact] public void testB() => convertToRoman(2).Should().Be("II");
         [Fact] public void testC() => convertToRoman(3).Should().Be("III");
         [Fact] public void testD() => convertToRoman(4).Should().Be("IV");
-        [Fact] public void testE() => convertToRoman(5).Should().Be("V");
-        [Fact] public void testF() => convertToRoman(6).Should().Be("VI");
-        [Fact] public void testG() => convertToRoman(7).Should().Be("VII");
-        [Fact] public void testH() => convertToRoman(8).Should().Be("VIII");
+        [Fact] public void testE()
+        {
+            convertToRoman(5).Should().Be("V");
+            convertToRoman(6).Should().Be("VI");
+            convertToRoman(7).Should().Be("VII");
+            convertToRoman(8).Should().Be("VIII");
+        } 
         [Fact] public void testI() => convertToRoman(9).Should().Be("IX");
         [Fact] public void testJ()
         {
