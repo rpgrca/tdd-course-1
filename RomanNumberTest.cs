@@ -99,9 +99,9 @@ namespace RomanNumbers
             var tens = numberToConvert / 10 % 10;
             var hundreds = numberToConvert / 100 % 10;
 
-            romanNumberAsString = new DigitConverter().ConvertDigit(hundreds, romanNumberAsString, "C", "D", "M");
-            romanNumberAsString = new DigitConverter().ConvertDigit(tens, romanNumberAsString, "X", "L", "C");
-            romanNumberAsString = new DigitConverter().ConvertDigit(units, romanNumberAsString, "I", "V", "X");
+            romanNumberAsString = new DigitConverter("C", "D", "M").ConvertDigit(hundreds, romanNumberAsString);
+            romanNumberAsString = new DigitConverter("X", "L", "C").ConvertDigit(tens, romanNumberAsString);
+            romanNumberAsString = new DigitConverter("I", "V", "X").ConvertDigit(units, romanNumberAsString);
             return romanNumberAsString;
         }
     }
