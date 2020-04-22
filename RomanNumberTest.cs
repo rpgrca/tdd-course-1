@@ -75,78 +75,56 @@ namespace RomanNumbers
             convertToRoman(59).Should().Be("LIX");
         }
 
+        [Fact] public void testT()
+        {
+            convertToRoman(60).Should().Be("LX");
+            convertToRoman(71).Should().Be("LXXI");
+            convertToRoman(84).Should().Be("LXXXIV");
+            convertToRoman(99).Should().Be("XCIX");
+        }
+        /*
+        [Fact]
+        "C", 100
+        "CCCXXXIII", 333
+        CDXLIV, 444
+        DCCCLXXXVIII, 888
+        CMXCIX, 999*/
+
         private string convertToRoman(int numberToConvert)
         {
             var romanNumberAsString = "";
             var units = numberToConvert % 10;
+            var tens = numberToConvert / 10 % 10;
 
-            if (numberToConvert >= 50)
-            {
-                romanNumberAsString += "L";
-            }
-            else
-            {
-                if (numberToConvert >= 40)
-                {
-                    romanNumberAsString += "XL";
-                }
-                else
-                {
-                    if (numberToConvert >= 30)
-                    {
-                        romanNumberAsString += "XXX";
-                    }
-                    else
-                    {
-                        if (numberToConvert >= 20)
-                        {
-                            romanNumberAsString += "XX";
-                        }
-                        else {
-                            if (numberToConvert >= 10)
-                            {
-                                romanNumberAsString += "X";
-                            }
-                        }
-                    }
-                }
-            }
-
-            romanNumberAsString = ConvertDigit(units, romanNumberAsString);
+            romanNumberAsString = ConvertDigit(tens, romanNumberAsString, "X", "L", "C");
+            romanNumberAsString = ConvertDigit(units, romanNumberAsString, "I", "V", "X");
             return romanNumberAsString;
         }
 
-        private string ConvertDigit(int numberToConvert, string romanNumberAsString)
+        private string ConvertDigit(int numberToConvert, string romanNumberAsString, string one, string five, string ten)
         {
             if (numberToConvert == 4)
             {
-                romanNumberAsString += "IV";
+                romanNumberAsString += one + five;
             }
             else
             {
                 if (numberToConvert == 9)
                 {
-                    romanNumberAsString += "IX";
+                    romanNumberAsString += one + ten;
                 }
                 else
                 {
                     if (numberToConvert >= 5 && numberToConvert <= 8)
                     {
-                        romanNumberAsString += "V";
+                        romanNumberAsString += five;
                     }
 
-                    romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
+                    for (int x = 0; x < numberToConvert % 5; x++)
+                    {
+                        romanNumberAsString += one;
+                    }
                 }
-            }
-
-            return romanNumberAsString;
-        }
-
-        private string addITo(int numberToConvert, string romanNumberAsString)
-        {
-            for (int x = 0; x < numberToConvert % 5; x++)
-            {
-                romanNumberAsString += "I";
             }
 
             return romanNumberAsString;
