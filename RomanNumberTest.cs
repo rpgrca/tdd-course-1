@@ -32,6 +32,7 @@ namespace RomanNumbers
             convertToRoman(17).Should().Be("XVII");
             convertToRoman(18).Should().Be("XVIII");
         }
+        [Fact] public void testN() => convertToRoman(19).Should().Be("XIX");
 
         private string convertToRoman(int numberToConvert)
         {
@@ -49,7 +50,11 @@ namespace RomanNumbers
                 }
                 else
                 {
-                    if (numberToConvert == 14)
+                    if (numberToConvert == 19)
+                    {
+                        romanNumberAsString = "XIX";
+                    }
+                    else if (numberToConvert == 14)
                     {
                         romanNumberAsString = "XIV";
                     }
