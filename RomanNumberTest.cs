@@ -19,16 +19,16 @@ namespace RomanNumbers
             convertToRoman(7).Should().Be("VII");
             convertToRoman(8).Should().Be("VIII");
         } 
-        [Fact] public void testI() => convertToRoman(9).Should().Be("IX");
-        [Fact] public void testJ()
+        [Fact] public void testF() => convertToRoman(9).Should().Be("IX");
+        [Fact] public void testG()
         {
             convertToRoman(10).Should().Be("X");
             convertToRoman(11).Should().Be("XI");
             convertToRoman(12).Should().Be("XII");
             convertToRoman(13).Should().Be("XIII");
         }
-        [Fact] public void testK() => convertToRoman(14).Should().Be("XIV");
-        [Fact] public void testL() => convertToRoman(15).Should().Be("XV");
+        [Fact] public void testH() => convertToRoman(14).Should().Be("XIV");
+        [Fact] public void testI() => convertToRoman(15).Should().Be("XV");
         [Fact] public void testM()
         {
             convertToRoman(16).Should().Be("XVI");
@@ -36,56 +36,58 @@ namespace RomanNumbers
             convertToRoman(18).Should().Be("XVIII");
         }
         [Fact] public void testN() => convertToRoman(19).Should().Be("XIX");
+        [Fact] public void testO()
+        {
+            convertToRoman(20).Should().Be("XX");
+            convertToRoman(21).Should().Be("XXI");
+            convertToRoman(24).Should().Be("XXIV");
+            convertToRoman(25).Should().Be("XXV");
+            convertToRoman(28).Should().Be("XXVIII");
+            convertToRoman(29).Should().Be("XXIX");
+        }
 
         private string convertToRoman(int numberToConvert)
         {
-            string romanNumberAsString = "";
+            var romanNumberAsString = "";
+            var modulo = numberToConvert % 10;
 
-            if (numberToConvert >= 10)
+            if (numberToConvert >= 20)
             {
-                romanNumberAsString = "X";
+                romanNumberAsString = "XX";
                 numberToConvert %= 10;
-
-                if (numberToConvert == 4)
-                {
-                    romanNumberAsString += "IV";
-                }
-                else
-                {
-                    if (numberToConvert == 9)
-                    {
-                        romanNumberAsString += "IX";
-                    }
-                    else
-                    {
-                        if (numberToConvert >= 5 && numberToConvert <= 8)
-                        {
-                            romanNumberAsString += "V";
-                        }
-
-                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
-                    }
-                }
             }
             else {
-                if (numberToConvert == 4)
+                if (numberToConvert >= 10)
                 {
-                    romanNumberAsString = "IV";
+                    romanNumberAsString += "X";
+                    numberToConvert %= 10;
+                }
+            }
+
+            romanNumberAsString = ConvertDigit(modulo, romanNumberAsString);
+            return romanNumberAsString;
+        }
+
+        private string ConvertDigit(int numberToConvert, string romanNumberAsString)
+        {
+            if (numberToConvert == 4)
+            {
+                romanNumberAsString += "IV";
+            }
+            else
+            {
+                if (numberToConvert == 9)
+                {
+                    romanNumberAsString += "IX";
                 }
                 else
                 {
-                    if (numberToConvert == 9)
+                    if (numberToConvert >= 5 && numberToConvert <= 8)
                     {
-                        romanNumberAsString = "IX";
+                        romanNumberAsString += "V";
                     }
-                   else
-                    {
-                        if (numberToConvert >= 5 && numberToConvert <= 8)
-                        {
-                            romanNumberAsString = "V";
-                        }
-                        romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
-                    }
+
+                    romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
                 }
             }
 
