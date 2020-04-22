@@ -65,31 +65,48 @@ namespace RomanNumbers
             convertToRoman(49).Should().Be("XLIX");
         }
 
+        [Fact] public void testR()
+        {
+            convertToRoman(50).Should().Be("L");
+            convertToRoman(51).Should().Be("LI");
+            convertToRoman(54).Should().Be("LIV");
+            convertToRoman(55).Should().Be("LV");
+            convertToRoman(58).Should().Be("LVIII");
+            convertToRoman(59).Should().Be("LIX");
+        }
+
         private string convertToRoman(int numberToConvert)
         {
             var romanNumberAsString = "";
             var units = numberToConvert % 10;
 
-            if (numberToConvert >= 40)
+            if (numberToConvert >= 50)
             {
-                romanNumberAsString += "XL";
+                romanNumberAsString += "L";
             }
             else
             {
-                if (numberToConvert >= 30)
+                if (numberToConvert >= 40)
                 {
-                    romanNumberAsString += "XXX";
+                    romanNumberAsString += "XL";
                 }
                 else
                 {
-                    if (numberToConvert >= 20)
+                    if (numberToConvert >= 30)
                     {
-                        romanNumberAsString += "XX";
+                        romanNumberAsString += "XXX";
                     }
-                    else {
-                        if (numberToConvert >= 10)
+                    else
+                    {
+                        if (numberToConvert >= 20)
                         {
-                            romanNumberAsString += "X";
+                            romanNumberAsString += "XX";
+                        }
+                        else {
+                            if (numberToConvert >= 10)
+                            {
+                                romanNumberAsString += "X";
+                            }
                         }
                     }
                 }
