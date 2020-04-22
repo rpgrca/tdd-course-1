@@ -82,20 +82,24 @@ namespace RomanNumbers
             convertToRoman(84).Should().Be("LXXXIV");
             convertToRoman(99).Should().Be("XCIX");
         }
-        /*
-        [Fact]
-        "C", 100
-        "CCCXXXIII", 333
-        CDXLIV, 444
-        DCCCLXXXVIII, 888
-        CMXCIX, 999*/
+
+        [Fact] public void testU()
+        {
+            convertToRoman(100).Should().Be("C");
+            convertToRoman(333).Should().Be("CCCXXXIII");
+            convertToRoman(444).Should().Be("CDXLIV");
+            convertToRoman(888).Should().Be("DCCCLXXXVIII");
+            convertToRoman(999).Should().Be("CMXCIX");
+        }
 
         private string convertToRoman(int numberToConvert)
         {
             var romanNumberAsString = "";
             var units = numberToConvert % 10;
             var tens = numberToConvert / 10 % 10;
+            var hundreds = numberToConvert / 100 % 10;
 
+            romanNumberAsString = ConvertDigit(hundreds, romanNumberAsString, "C", "D", "M");
             romanNumberAsString = ConvertDigit(tens, romanNumberAsString, "X", "L", "C");
             romanNumberAsString = ConvertDigit(units, romanNumberAsString, "I", "V", "X");
             return romanNumberAsString;
