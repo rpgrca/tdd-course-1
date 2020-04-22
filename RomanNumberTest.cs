@@ -53,11 +53,7 @@ namespace RomanNumbers
                     {
                         romanNumberAsString = "XIV";
                     }
-                    else if (numberToConvert == 15)
-                    {
-                        romanNumberAsString = "XV";
-                    }
-                    else if (numberToConvert >= 16 && numberToConvert <= 18)
+                    else if (numberToConvert >= 15 && numberToConvert <= 18)
                     {
                         romanNumberAsString = "XV";
                         romanNumberAsString = addITo(numberToConvert, romanNumberAsString);
