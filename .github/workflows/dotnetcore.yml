@@ -20,26 +20,28 @@ jobs:
         dotnet-version: 2.2.203
 
     - name: Install dependencies
-      run: dotnet restore
+      run: |
+           dotnet restore TusLibros
 
     - name: Install tools
       run: dotnet tool install --global coverlet.console
 
     - name: Build Release
-      working-directory: TusLibros
-      run: dotnet build --configuration Release --no-restore
+      run: |
+           for s in TusLibros; do
+               dotnet build --configuration Release --no-restore $s
+           done
 
     - name: Build Debug
-      working-directory: TusLibros
-      run: dotnet build --configuration Debug --no-restore
+      run: |
+           for s in TusLibros; do
+               dotnet build --configuration Debug --no-restore $s
+           done
 
-    - name: Testing Core Library
-      working-directory: TusLibros
-      run: coverlet TusLibros.Core.UnitTests/bin/Debug/netcoreapp2.2/TusLibros.Core.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.Core.UnitTests/TusLibros.Core.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output core.coverage.xml
-
-    - name: Testing API Library
-      working-directory: TusLibros
-      run: coverlet TusLibros.API.UnitTests/bin/Debug/netcoreapp2.2/TusLibros.API.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.API.UnitTests/TusLibros.API.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output api.coverage.xml --exclude "[TusLibros.Core]*"
+    - name: Testing
+      run: |
+           coverlet TusLibros.Core.UnitTests/bin/Debug/netcoreapp2.2/TusLibros.Core.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.Core.UnitTests/TusLibros.Core.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output TusLibros.core.coverage.xml
+           coverlet TusLibros.API.UnitTests/bin/Debug/netcoreapp2.2/TusLibros.API.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.API.UnitTests/TusLibros.API.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output TusLibros.api.coverage.xml --exclude "[TusLibros.Core]*"
 
     - name: Upload
       run: bash <(curl -s https://codecov.io/bash)
