@@ -20,26 +20,25 @@ jobs:
         dotnet-version: 2.2.203
 
     - name: Install dependencies
-      run: dotnet restore
+      run: |
+           for s in TusLibros; do
+               dotnet restore $s
+           done
 
     - name: Install tools
       run: dotnet tool install --global coverlet.console
 
-    - name: Build Release
+    - name: Build TusLibros Debug and Release
       working-directory: TusLibros
-      run: dotnet build --configuration Release --no-restore
+      run: |
+           dotnet build --configuration Release --no-restore
+           dotnet build --configuration Debug --no-restore
 
-    - name: Build Debug
+    - name: Testing TusLibros
       working-directory: TusLibros
-      run: dotnet build --configuration Debug --no-restore
-
-    - name: Testing Core Library
-      working-directory: TusLibros
-      run: coverlet TusLibros.Core.UnitTests/bin/Debug/netcoreapp2.2/TusLibros.Core.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.Core.UnitTests/TusLibros.Core.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output core.coverage.xml
-
-    - name: Testing API Library
-      working-directory: TusLibros
-      run: coverlet TusLibros.API.UnitTests/bin/Debug/netcoreapp2.2/TusLibros.API.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.API.UnitTests/TusLibros.API.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output api.coverage.xml --exclude "[TusLibros.Core]*"
+      run: |
+           coverlet TusLibros.Core.UnitTests/bin/Debug/net5.0/TusLibros.Core.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.Core.UnitTests/TusLibros.Core.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output core.coverage.xml
+           coverlet TusLibros.API.UnitTests/bin/Debug/net5.0/TusLibros.API.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.API.UnitTests/TusLibros.API.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output api.coverage.xml --exclude "[TusLibros.Core]*"
 
     - name: Upload
       run: bash <(curl -s https://codecov.io/bash)
