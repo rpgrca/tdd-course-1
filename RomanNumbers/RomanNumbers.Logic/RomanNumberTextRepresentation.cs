@@ -1,8 +1,6 @@
-using System.Diagnostics.Contracts;
-using System;
 using System.Collections.Generic;
 
-namespace RomanNumbers
+namespace RomanNumbers.Logic
 {
     public class RomanNumberTextRepresentation
     {
@@ -28,4 +26,3 @@ namespace RomanNumbers
         }
     }
 }
-

@@ -3,8 +3,9 @@ using System.Linq;
 using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
+using RomanNumbers.Logic;
 
-namespace RomanNumbers
+namespace RomanNumbers.UnitTests
 {
     public class RomanNumberTest
     {
