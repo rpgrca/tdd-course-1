@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Holiday
+namespace Holiday.Logic
 {
     public class HolidayCalendar
     {

@@ -1,6 +1,7 @@
 using Holiday;
 using System;
 using Xunit;
+using Holiday.Logic;
 
 namespace Holiday.UnitTests
 {
