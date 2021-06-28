@@ -21,18 +21,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-           for s in TusLibros RomanNumbers; do
+           for s in TusLibros RomanNumbers Holiday; do
                dotnet restore $s
            done
 
     - name: Install tools
       run: dotnet tool install --global coverlet.console
-
-    - name: Build RomanNumbers Debug and Release
-      working-directory: RomanNumbers
-      run: |
-           dotnet build --configuration Release --no-restore
-           dotnet build --configuration Debug --no-restore
 
     - name: Build TusLibros Debug and Release
       working-directory: TusLibros
@@ -40,10 +34,11 @@ jobs:
            dotnet build --configuration Release --no-restore
            dotnet build --configuration Debug --no-restore
 
-    - name: Testing RomanNumbers
+    - name: Build other projects in Debug and Release
       run: |
-           for s in RomanNumbers; do
-               coverlet $s/$s.UnitTests/bin/Debug/net5.0/$s.UnitTests.dll --target "dotnet" --targetargs "test $s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
+           for s in RomanNumbers Holiday; do
+               dotnet build --configuration Release --no-restore $s
+               dotnet build --configuration Debug --no-restore $s
            done
 
     - name: Testing TusLibros
@@ -52,5 +47,17 @@ jobs:
            coverlet TusLibros.Core.UnitTests/bin/Debug/net5.0/TusLibros.Core.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.Core.UnitTests/TusLibros.Core.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output core.coverage.xml
            coverlet TusLibros.API.UnitTests/bin/Debug/net5.0/TusLibros.API.UnitTests.dll --target "dotnet" --targetargs "test TusLibros.API.UnitTests/TusLibros.API.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output api.coverage.xml --exclude "[TusLibros.Core]*"
 
+    - name: Testing other projects
+      run: |
+           for s in RomanNumbers Holiday; do
+               coverlet $s/$s.UnitTests/bin/Debug/net5.0/$s.UnitTests.dll --target "dotnet" --targetargs "test $s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
+           done
+
     - name: Upload
       run: bash <(curl -s https://codecov.io/bash)
+
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: ./*.coverage.xml
