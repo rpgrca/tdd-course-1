@@ -2,23 +2,18 @@ namespace RomanNumbers.Logic
 {
     public class DigitConverter
     {
-        private string _one;
-        private string _five;
-        private string _ten;
-        private int _divisor;
+        private readonly string _one;
+        private readonly string _five;
+        private readonly string _ten;
+        private readonly int _divisor;
 
-        public DigitConverter(string one, string five, string ten, int divisor)
-        {
-            this._one = one;
-            this._five = five;
-            this._ten = ten;
-            this._divisor = divisor;
-        }
+        public DigitConverter(string one, string five, string ten, int divisor) =>
+            (_one, _five, _ten, _divisor) = (one, five, ten, divisor);
 
         public string ConvertDigit(int numberToConvert)
         {
             numberToConvert = numberToConvert / _divisor % 10;
-            string romanNumberAsString = "";
+            var romanNumberAsString = "";
 
             if (numberToConvert == 4)
             {
@@ -37,7 +32,7 @@ namespace RomanNumbers.Logic
                         romanNumberAsString += _five;
                     }
 
-                    for (int x = 0; x < numberToConvert % 5; x++)
+                    for (var x = 0; x < numberToConvert % 5; x++)
                     {
                         romanNumberAsString += _one;
                     }
