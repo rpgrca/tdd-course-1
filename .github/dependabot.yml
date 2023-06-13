@@ -4,19 +4,22 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "wednesday"
 
   - package-ecosystem: "nuget"
     directory: "/Holiday"
     schedule:
       interval: "weekly"
+      day: "wednesday"
 
   - package-ecosystem: "nuget"
     directory: "/RomanNumbers"
     schedule:
       interval: "weekly"
+      day: "wednesday"
 
   - package-ecosystem: "nuget"
     directory: "/TusLibros"
     schedule:
       interval: "weekly"
-
+      day: "wednesday"
