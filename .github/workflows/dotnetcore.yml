@@ -53,8 +53,10 @@ jobs:
                coverlet $s/$s.UnitTests/bin/Debug/net9/$s.UnitTests.dll --target "dotnet" --targetargs "test $s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
            done
 
-    - name: Upload
-      run: bash <(curl -s https://codecov.io/bash)
+    - name: Upload coverage to CodeCov
+      uses: codecov/codecov-action@v5
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Archive code coverage results
       uses: actions/upload-artifact@v4
